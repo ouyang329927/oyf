@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+			}
+			.logo_img{
+				width: 300px;
+				height: 150px;
+				margin: auto;
+				background: url(img/bd_logo1.png);
+				background-size: contain;
+			}
+			.search{
+				width: 290px;
+				height: 33px;
+				float: left;
+				margin-left: 36%;
+				position: relative;
+			}
+			input{
+				width: 270px;
+				height: 33px;
+				font-size: 20px;
+				padding: 0 10px;
+			}
+			.btn{
+				width: 100px;
+				height: 35px;
+				background: #38f;
+				color: white;
+				text-align: center;
+				line-height: 30px;
+				float: left;
+				cursor: pointer;
+			}
+			.contain{
+				width: 290px;
+				border: 1px solid #ccc;
+				position: absolute;
+				display: none;
+			}
+			li{
+				list-style: none;
+				line-height: 25px;
+				padding: 0 10px;
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+				cursor: pointer;
+			}
+			li:hover{
+				background: #ccc;
+			}
+		</style>
+	</head>
+	<body>
+		<div class="logo_img"></div>
+		<div class="search">
+			<input type="text" oninput="getvalue()"/>
+			<div class="contain">
+				<ul id="ul">
+				</ul>
+			</div>
+		</div>
+		<div class="btn">百度一下</div>
+		<script>
+		function oyf(data){
+			var ullist=document.getElementById('ul')
+			// 删除ul标签下的所有li节点
+			while(ullist.hasChildNodes()){
+				ullist.removeChild(ullist.firstChild)
+			}
+			var fragement=document.createDocumentFragment()
+			for(var i=0;i<data.s.length;i++){
+				var li=document.createElement('li')
+				li.appendChild(document.createTextNode(data.s[i]))
+				fragement.appendChild(li)
+			}
+			ul.appendChild(fragement)
+		}
+		</script>
+		<script>
+			function getvalue(){
+				var val=document.getElementsByTagName('input')[0]
+				var sc=document.createElement('script')
+				sc.src="https://sp0.baidu.com/5a1Fazu8AA54nxGko9WTAnF6hhy/su?wd="+val.value+"&json=1&p=3&sid=1449_21112_20240_20929&req=2&sc=eb&csor=0&cb=oyf"
+				document.body.appendChild(sc)
+				if(!val.value){
+					document.getElementsByClassName('contain')[0].style.display='none'
+				}else{
+					document.getElementsByClassName('contain')[0].style.display='block'
+				}
+			}
+		</script>
+	</body>
+</html>
